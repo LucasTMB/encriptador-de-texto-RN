@@ -10,7 +10,9 @@ const stages = [
 
 export default function Encriptador() {
 
-    const [exitStage, setExitStage] = useState(stages[0].name);
+    const [exitStage, setExitStage] = useState(stages[1].name);
+    const [inputText, setInputText] = useState('');
+    const [outputText, setOutputText] = useState('');
 
  return (
    <>
