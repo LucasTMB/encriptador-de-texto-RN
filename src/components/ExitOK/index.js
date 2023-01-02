@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 
-export default function ExitOK() {
+export default function ExitOK({outputText}) {
  return (
    <View style={styles.conteudoResultadoOK}>
       <TextInput 
         multiline={true}
         numberOfLines={8}
         style={styles.saidaTextArea}
+        value={outputText}
       />
       <TouchableOpacity style={styles.copyBtn}>
           <Text style={styles.textCopyBtn}>

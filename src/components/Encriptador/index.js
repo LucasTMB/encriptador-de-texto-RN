@@ -10,9 +10,53 @@ const stages = [
 
 export default function Encriptador() {
 
-    const [exitStage, setExitStage] = useState(stages[1].name);
+    const [exitStage, setExitStage] = useState(stages[0].name);
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
+
+    const botaoCriptografar = () => {
+        const textoEncriptado = criptografar(inputText);
+        setOutputText(textoEncriptado);
+        setExitStage(stages[1].name);
+    }
+
+    const botaoDescriptografar = () => {
+        const textoDescriptado = descriptografar(inputText);
+        setOutputText(textoDescriptado);
+        setExitStage(stages[1].name);
+    }
+
+    const criptografar = (inputText) => {
+        const matrizCodigo = [['a', 'ai'], ['e', 'enter'], ['i', 'imes'], ['o', 'ober'], ['u', 'ufat'], ['aimes', 'ai']];
+
+        let stringEncriptada = inputText;
+        stringEncriptada = stringEncriptada.toLowerCase();
+
+        for (let i = 0 ; i < matrizCodigo.length ;  i++) {
+            if (stringEncriptada.includes(matrizCodigo[i][0])) {
+                stringEncriptada = stringEncriptada.replaceAll(
+                    matrizCodigo[i][0], matrizCodigo[i][1]
+                );
+            }
+        }
+        return stringEncriptada;
+    }
+
+    const descriptografar = (inputText) => {
+        const matrizCodigo = [['a', 'ai'], ['e', 'enter'], ['i', 'imes'], ['o', 'ober'], ['u', 'ufat']];
+
+        let stringDescriptada = inputText;
+        stringDescriptada = stringDescriptada.toLowerCase();
+
+        for (let i = 0 ; i < matrizCodigo.length ; i++) {
+            if (stringDescriptada.includes(matrizCodigo[i][1])) {
+                stringDescriptada = stringDescriptada.replaceAll(
+                    matrizCodigo[i][1], matrizCodigo[i][0]
+                );
+            }
+        }
+        return stringDescriptada;
+    }
 
  return (
    <>
@@ -23,6 +67,7 @@ export default function Encriptador() {
                 style={styles.entradaTextArea}
                 placeholder="Digite seu texto..."
                 placeholderTextColor="#0A3871"
+                onChangeText={setInputText}
             />
             <Text style={styles.description}>
                 ⓘ Apenas letras minúsculas e sem acento.
@@ -30,6 +75,7 @@ export default function Encriptador() {
             <View style={styles.buttons}>
                 <TouchableOpacity
                     style={styles.criptoBtn}
+                    onPress={botaoCriptografar}
                 >
                     <Text 
                         style={styles.textCriptoBtn}
@@ -39,6 +85,7 @@ export default function Encriptador() {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.descriptoBtn}
+                    onPress={botaoDescriptografar}
                 >
                     <Text
                         style={styles.textDescriptoBtn}
@@ -51,7 +98,9 @@ export default function Encriptador() {
 
         <View style={styles.saida}>
             {exitStage === 'resultadoVazio' && <ExitNone />}
-            {exitStage === 'resultadoOK' && <ExitOK />}
+            {exitStage === 'resultadoOK' && <ExitOK 
+                outputText={outputText}
+            />}
         </View>
    </>
   );
