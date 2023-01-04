@@ -27,34 +27,36 @@ export default function Encriptador() {
     }
 
     const criptografar = (inputText) => {
-        const matrizCodigo = [['a', 'ai'], ['e', 'enter'], ['i', 'imes'], ['o', 'ober'], ['u', 'ufat'], ['aimes', 'ai']];
-
-        let stringEncriptada = inputText;
-        stringEncriptada = stringEncriptada.toLowerCase();
-
-        for (let i = 0 ; i < matrizCodigo.length ;  i++) {
-            if (stringEncriptada.includes(matrizCodigo[i][0])) {
-                stringEncriptada = stringEncriptada.replaceAll(
-                    matrizCodigo[i][0], matrizCodigo[i][1]
-                );
-            }
+        let matrizCodigo = {
+            a: "ai", 
+            e: "enter", 
+            i: "imes", 
+            o: "ober", 
+            u: "ufat"
         }
+
+        let stringEncriptada = inputText.toLowerCase();
+        stringEncriptada = stringEncriptada.replace(/a|e|i|o|u/g, (ocorrencia) => {
+            return matrizCodigo[ocorrencia];
+        });
+
         return stringEncriptada;
     }
 
     const descriptografar = (inputText) => {
-        const matrizCodigo = [['a', 'ai'], ['e', 'enter'], ['i', 'imes'], ['o', 'ober'], ['u', 'ufat']];
-
-        let stringDescriptada = inputText;
-        stringDescriptada = stringDescriptada.toLowerCase();
-
-        for (let i = 0 ; i < matrizCodigo.length ; i++) {
-            if (stringDescriptada.includes(matrizCodigo[i][1])) {
-                stringDescriptada = stringDescriptada.replaceAll(
-                    matrizCodigo[i][1], matrizCodigo[i][0]
-                );
-            }
+        const matrizCodigo = {
+            ai: "a",
+            enter: "e",
+            imes: "i",
+            ober: "o",
+            ufat: "u"
         }
+
+        let stringDescriptada = inputText.toLowerCase();
+        stringDescriptada = stringDescriptada.replace(/ai|enter|imes|ober|ufat/g, (ocorrencia) => {
+            return matrizCodigo[ocorrencia];
+        });
+        
         return stringDescriptada;
     }
 
