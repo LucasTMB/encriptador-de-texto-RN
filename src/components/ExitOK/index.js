@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Clipboard from '@react-native-community/clipboard';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 
 export default function ExitOK({outputText}) {
+
+  let copyText = outputText;
+
  return (
    <View style={styles.conteudoResultadoOK}>
       <TextInput 
@@ -9,8 +13,14 @@ export default function ExitOK({outputText}) {
         numberOfLines={8}
         style={styles.saidaTextArea}
         value={outputText}
+        onChangeText={copyText => setCopyText(copyText)}
       />
-      <TouchableOpacity style={styles.copyBtn}>
+      <TouchableOpacity 
+        style={styles.copyBtn}
+        onPress={() => {
+          Clipboard.setString(copyText);
+        }}
+      >
           <Text style={styles.textCopyBtn}>
             Copiar texto
           </Text>
