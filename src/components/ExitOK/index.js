@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     },
     saidaTextArea: {
       color: '#0A3871',
-      fontSize: 20,
-      marginBottom: 5
+      fontSize: 15,
+      marginBottom: 5,
     },
     copyBtn: {
       alignItems: 'center',
