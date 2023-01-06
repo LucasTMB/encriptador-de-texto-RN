@@ -13,16 +13,19 @@ export default function Encriptador() {
     const [exitStage, setExitStage] = useState(stages[0].name);
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
+    const [copyText, setCopyText] = useState('');
 
     const botaoCriptografar = () => {
         const textoEncriptado = criptografar(inputText);
         setOutputText(textoEncriptado);
+        setCopyText(textoEncriptado);
         setExitStage(stages[1].name);
     }
 
     const botaoDescriptografar = () => {
         const textoDescriptado = descriptografar(inputText);
         setOutputText(textoDescriptado);
+        setCopyText(textoDescriptado);
         setExitStage(stages[1].name);
     }
 
@@ -102,6 +105,7 @@ export default function Encriptador() {
             {exitStage === 'resultadoVazio' && <ExitNone />}
             {exitStage === 'resultadoOK' && <ExitOK 
                 outputText={outputText}
+                copyText={copyText}
             />}
         </View>
    </>
