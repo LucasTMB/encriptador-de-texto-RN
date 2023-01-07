@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Clipboard from '@react-native-community/clipboard';
+import React from 'react';
+import * as Clipboard from 'expo-clipboard';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 
 export default function ExitOK({outputText, copyText}) {
 
-  const botaoCopiar = () => {
-    alert(copyText)
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(copyText);
   }
 
  return (
@@ -18,7 +18,7 @@ export default function ExitOK({outputText, copyText}) {
       />
       <TouchableOpacity 
         style={styles.copyBtn}
-        onPress={botaoCopiar}
+        onPress={copyToClipboard}
       >
           <Text style={styles.textCopyBtn}>
             Copiar texto
