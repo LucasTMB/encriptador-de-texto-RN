@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import AluraLogo from '../../assets/alura-logo.png';
 import ExitNone from '../ExitNone';
 import ExitOK from '../ExitOK';
 
@@ -14,6 +15,12 @@ export default function Encriptador() {
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
     const [copyText, setCopyText] = useState('');
+
+    const reload = () => {
+        setOutputText('');
+        setCopyText('');
+        setExitStage(stages[0].name);
+    }
 
     const botaoCriptografar = () => {
         const textoEncriptado = criptografar(inputText);
@@ -65,6 +72,17 @@ export default function Encriptador() {
 
  return (
    <>
+        <View style={styles.header}>
+            <TouchableOpacity
+                onPress={reload}
+            >
+                <Image 
+                    source={AluraLogo}
+                    style={styles.logoAlura}
+                />
+            </TouchableOpacity>
+        </View>
+
         <View style={styles.entrada}>
             <TextInput 
                 multiline={true}
@@ -113,6 +131,12 @@ export default function Encriptador() {
 }
 
 const styles = StyleSheet.create({
+    header: {
+        paddingTop: 50,
+    },
+    logoAlura: {
+        marginLeft: 15,
+    },
     entrada: {
         margin: 10,
     },
